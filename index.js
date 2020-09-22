@@ -15,6 +15,7 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopo
 app.use(express.json())
 
 // Route Middleware
+
 app.use('/api/users', authRoute)
 
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`))
