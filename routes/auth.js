@@ -6,22 +6,22 @@ router.post('/register', async (req,res)=>{
     name:     req.body.name,
     email:    req.body.email,
     password: req.body.password,
-
   });
-  try{
+  
+  console.log(`User Object Being sent to DB: ${user}`)
+  
+  try{    
     const savedUser = await user.save()
-    res.send(savedUser)
+    res.send(savedUser)    
 
   }catch(err){
+    console.log("error " + err)
     res.status(400).send(err)
   }
 
 })
-router.get('/', (req,res)=>{
 
-  res.send('Home Page of auth!') 
-
-})
+router.get('/', (req,res)=>{ res.send('Home Page of auth!') })
 
 
 module.exports = router
