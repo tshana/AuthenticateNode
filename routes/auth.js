@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-
-const User = require('../model/User');
+const jwt    = require('jsonwebtoken');
+const User   = require('../model/User');
 const { registerValidation, loginValidation } = require('../validation');
 
-router.post('/register', async (req,res)=>{
+router.post('/register', async (req,res) => {
   // Validate data before entering into DB
   const { error } = registerValidation(req.body)
   
@@ -55,9 +54,17 @@ router.post('/login', async (req,res) => {
   // Create and give a token to the user.
 
   const token = await jwt.sign({id: user.id}, process.env.TOKEN_SECRET, {expiresIn: '1hr'})
- 
   res.header('auth-token', token)
 
+})
+
+// Get List of users back from the database
+router.get('/all', async (req,res) => {
+  try{
+    const getUsers = await User.find();
+    res.json(getUsers)
+  }
+  catch(err){ res.status(400).send(`An error occured: ${err}`)}
 })
 
 
