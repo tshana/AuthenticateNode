@@ -1,2 +1,2 @@
 # AuthenticateNode
- Node authentication api
+Node Authentication api using Express, JWT, and MongoDB
